@@ -75,11 +75,13 @@ def read_recipients_list(file_name):
     address_list=map(rstrip,address)
 
     #  reject comment lines and NULL lines
-    p1 = re.compile("^\s*#")
-    p2 = re.compile("^\s*$")
+    re_comment = re.compile("^\s*#")
+    re_null_line = re.compile("^\s*$")
 
-    address_list= [x for x in address_list if p1.match(x) == None ]
-    address_list= [x for x in address_list if p2.match(x) == None ]
+    #   http://docs.python.jp/2/tutorial/datastructures.html#id6
+    #
+    address_list= [x for x in address_list if re_comment.match(x) == None ]
+    address_list= [x for x in address_list if re_null_line.match(x) == None ]
     
     return address_list
 
